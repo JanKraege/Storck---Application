@@ -1,1 +1,783 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jan Kraege | Storck Management Trainee Marketing</title>
 
+  <style>
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --blue: #17324d;
+      --blue-dark: #0d2236;
+      --red: #e84022;
+      --cream: #fffaf2;
+      --cream-dark: #f3eadb;
+      --gold: #f4a300;
+      --pasta: #ffd36a;
+      --white: #ffffff;
+      --black: #1b1b1b;
+      --text: #303030;
+      --muted: #6f6f6f;
+      --border: #eadfcf;
+      --shadow: 0 16px 34px rgba(23, 50, 77, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .lang-en, .lang-de { display: none !important; }
+    body.show-de .lang-de { display: initial !important; }
+    body.show-en .lang-en { display: initial !important; }
+
+    body.show-de p.lang-de,
+    body.show-de div.lang-de,
+    body.show-de h1.lang-de,
+    body.show-de h2.lang-de,
+    body.show-de h3.lang-de,
+    body.show-de h4.lang-de,
+    body.show-de span.lang-de,
+    body.show-de strong.lang-de {
+      display: block !important;
+    }
+
+    body.show-en p.lang-en,
+    body.show-en div.lang-en,
+    body.show-en h1.lang-en,
+    body.show-en h2.lang-en,
+    body.show-en h3.lang-en,
+    body.show-en h4.lang-en,
+    body.show-en span.lang-en,
+    body.show-en strong.lang-en {
+      display: block !important;
+    }
+
+    body.show-de .inline.lang-de,
+    body.show-en .inline.lang-en { display: inline !important; }
+
+    body.show-de .application-tag.lang-de,
+    body.show-de .hero-pill.lang-de,
+    body.show-en .application-tag.lang-en,
+    body.show-en .hero-pill.lang-en {
+      display: inline-flex !important;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 16px 8%;
+      background: var(--blue);
+      box-shadow: 0 3px 18px rgba(0,0,0,0.12);
+      border-bottom: 5px solid var(--red);
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      white-space: nowrap;
+    }
+
+    .logo-mark {
+      width: 112px;
+      height: 48px;
+      background: var(--white);
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-size: 28px;
+      font-weight: 900;
+      font-style: normal;
+      letter-spacing: -0.8px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+      position: relative;
+    }
+
+    .logo-mark::after {
+      content: "Marketing Trainee";
+      position: absolute;
+      bottom: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      font-style: normal;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      color: var(--white);
+      font-size: 15px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .logo-small {
+      display: block;
+      font-size: 10px;
+      color: rgba(255,255,255,0.75);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 17px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.92);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    nav a:hover { color: var(--pasta); }
+
+    .language-toggle {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.8);
+      padding: 9px 15px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .language-toggle:hover {
+      background: var(--white);
+      color: var(--blue);
+    }
+
+    .nav-button {
+      background: var(--red);
+      color: var(--white) !important;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--red);
+      font-weight: 800;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    }
+
+    header {
+      min-height: 680px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: var(--blue);
+      text-align: center;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(216,178,92,0.28), transparent 28%),
+        radial-gradient(circle at 84% 74%, rgba(200,16,46,0.12), transparent 25%),
+        linear-gradient(135deg, #fbf6ec 0%, #f6ead6 48%, #fffaf2 100%);
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(23,50,77,0.06) 0 1px, transparent 1px 90px),
+        linear-gradient(0deg, rgba(23,50,77,0.04) 0 1px, transparent 1px 90px);
+      opacity: 0.8;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      bottom: -120px;
+      height: 260px;
+      background:
+        linear-gradient(90deg, rgba(23,50,77,0.96) 0 34%, rgba(200,16,46,0.94) 34% 43%, rgba(216,178,92,0.90) 43% 56%, rgba(200,16,46,0.94) 56% 65%, rgba(23,50,77,0.96) 65% 100%);
+      transform: skewY(-3deg);
+      opacity: 0.95;
+    }
+
+    .pasta-shape {
+      position: absolute;
+      z-index: 1;
+      border: 3px solid rgba(216,178,92,0.55);
+      border-radius: 999px;
+      opacity: 0.85;
+    }
+
+    .pasta-shape.one {
+      width: 320px;
+      height: 120px;
+      left: 6%;
+      top: 24%;
+      transform: rotate(-18deg);
+    }
+
+    .pasta-shape.two {
+      width: 360px;
+      height: 125px;
+      right: 7%;
+      top: 42%;
+      transform: rotate(16deg);
+      border-color: rgba(23,50,77,0.25);
+    }
+
+    .pasta-shape.three {
+      width: 260px;
+      height: 90px;
+      left: 35%;
+      bottom: 22%;
+      transform: rotate(7deg);
+      border-color: rgba(200,16,46,0.22);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      padding: 90px 10%;
+    }
+
+    .application-tag {
+      background: var(--blue);
+      color: var(--white);
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-weight: 900;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 24px;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 26px rgba(13,34,54,0.18);
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+
+    header h1 {
+      font-size: 62px;
+      line-height: 1.05;
+      margin: 0;
+      color: var(--blue);
+      text-shadow: 0 3px 0 rgba(255,255,255,0.65);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    header h2 {
+      font-size: 26px;
+      font-weight: 500;
+      max-width: 960px;
+      margin: 22px auto 0;
+      color: #10213f;
+    }
+
+    .tagline {
+      font-size: 18px;
+      max-width: 960px;
+      margin: 26px auto 0;
+      color: #42526a;
+    }
+
+    .hero-pill {
+      align-items: center;
+      justify-content: center;
+      margin-top: 38px;
+      background: var(--red);
+      color: var(--white);
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-weight: 900;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+    }
+
+    section {
+      padding: 74px 8%;
+      max-width: 1300px;
+      margin: 0 auto;
+      scroll-margin-top: 100px;
+    }
+
+    h3 {
+      font-size: 43px;
+      color: var(--blue);
+      text-align: center;
+      margin: 0 0 18px;
+      letter-spacing: -0.5px;
+      font-weight: 700;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto 40px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .accent-line {
+      width: 92px;
+      height: 5px;
+      background: linear-gradient(90deg, var(--blue), var(--red), var(--gold));
+      margin: 0 auto 34px;
+      border-radius: 999px;
+    }
+
+    .intro-box, .intro {
+      max-width: 960px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .intro-box p, .intro p {
+      font-size: 18px;
+      color: #374151;
+      line-height: 1.85;
+      margin-bottom: 14px;
+    }
+
+    .intro-box strong, .intro strong { color: var(--blue); }
+
+    .status-box {
+      max-width: 920px;
+      margin: 34px auto 0;
+      background: var(--white);
+      border-left: 8px solid var(--red);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .status-box h4 {
+      color: var(--blue);
+      font-size: 24px;
+      margin: 0 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .status-box p {
+      color: #374151;
+      font-size: 17px;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .profile-grid, .program-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(300px, 550px));
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .profile-box, .program-box {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 42px;
+      min-height: 315px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      border-top: 7px solid var(--blue);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-box::before,
+    .program-box::before,
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 105px;
+      height: 105px;
+      background: rgba(216,178,92,0.18);
+      border-radius: 50%;
+    }
+
+    .profile-box:nth-child(2),
+    .profile-box:nth-child(3),
+    .program-box:nth-child(2),
+    .program-box:nth-child(3) {
+      border-top-color: var(--red);
+      background: #fffdf8;
+    }
+
+    .profile-box h4, .program-box h4 {
+      color: var(--blue);
+      font-size: 27px;
+      margin: 12px 0 14px;
+      font-weight: 700;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .profile-box p, .program-box p {
+      color: #374151;
+      font-size: 17px;
+      margin: 8px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .emoji {
+      font-size: 38px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .timeline {
+      max-width: 950px;
+      margin: 0 auto;
+      padding-left: 35px;
+      border-left: 5px solid var(--blue);
+    }
+
+    .timeline div {
+      margin-bottom: 24px;
+      font-size: 17px;
+      background: var(--white);
+      padding: 24px 26px;
+      border-radius: 18px;
+      box-shadow: 0 8px 22px rgba(13,34,54,0.08);
+      border: 1px solid var(--border);
+    }
+
+    .timeline strong { color: var(--blue); }
+
+    .brand-band {
+      max-width: none;
+      background:
+        linear-gradient(rgba(23,50,77,0.90), rgba(13,34,54,0.92)),
+        radial-gradient(circle at 16% 20%, rgba(216,178,92,0.4), transparent 28%),
+        linear-gradient(120deg, #17324d 0%, #0d2236 70%, #001a38 100%);
+      color: var(--white);
+      padding: 84px 10%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 90px),
+        linear-gradient(0deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 90px);
+      opacity: 0.9;
+    }
+
+    .brand-band::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 150px;
+      border: 4px solid rgba(216,178,92,0.36);
+      border-radius: 999px;
+      right: -80px;
+      bottom: 30px;
+      transform: rotate(-18deg);
+    }
+
+    .brand-band h3, .brand-band p {
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-band h3 { color: var(--white); }
+
+    .brand-band p {
+      max-width: 960px;
+      margin: 12px auto;
+      font-size: 19px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      border: 1px solid var(--border);
+      border-top: 6px solid var(--gold);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card.accent {
+      background:
+        linear-gradient(180deg, rgba(248,243,232,0.65), rgba(255,255,255,0.98)),
+        var(--white);
+    }
+
+    .card h4 {
+      color: var(--blue);
+      font-size: 22px;
+      margin: 10px 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .card p {
+      color: #374151;
+      font-size: 16.5px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .highlight {
+      max-width: none;
+      background:
+        linear-gradient(rgba(248,243,232,0.92), rgba(248,243,232,0.96)),
+        radial-gradient(circle at 12% 22%, rgba(216,178,92,0.32), transparent 30%),
+        radial-gradient(circle at 86% 68%, rgba(200,16,46,0.12), transparent 25%);
+      color: var(--blue);
+      padding: 90px 10%;
+      text-align: center;
+      border-top: 8px solid var(--red);
+      scroll-margin-top: 90px;
+    }
+
+    .highlight h3 {
+      color: var(--blue);
+      font-size: 44px;
+      margin-bottom: 18px;
+    }
+
+    .highlight p {
+      max-width: 920px;
+      margin: 14px auto;
+      font-size: 19px;
+      line-height: 1.85;
+      color: #26364f;
+    }
+
+    footer {
+      text-align: center;
+      padding: 52px 10%;
+      background: var(--blue);
+      color: var(--white);
+      border-top: 8px solid var(--red);
+    }
+
+    footer p {
+      margin: 14px 0;
+      font-size: 17px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    footer strong {
+      font-size: 19px;
+      color: var(--white);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    footer a { color: var(--pasta); }
+    footer a:hover { color: var(--white); }
+
+    @media (max-width: 1050px) {
+      nav {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      nav ul {
+        justify-content: center;
+        gap: 14px;
+      }
+
+      header h1 { font-size: 52px; }
+    }
+
+    @media (max-width: 800px) {
+      nav { padding: 18px 6%; }
+
+      header { min-height: 650px; }
+      header h1 { font-size: 38px; }
+      header h2 { font-size: 21px; }
+
+      h3 { font-size: 31px; }
+      section { padding: 56px 6%; }
+
+      .profile-grid, .program-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-box, .program-box {
+        min-height: auto;
+        padding: 34px 24px;
+      }
+
+      .timeline { padding-left: 22px; }
+
+      .logo-wrap {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .logo-mark {
+        width: 104px;
+        height: 44px;
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body class="show-de">
+
+  <nav>
+    <div class="logo-wrap">
+      <div class="logo-mark">STORCK</div>
+      <div class="logo-text">Jan Kraege<span class="logo-small"><span class="lang-de inline">Bewerbung Management Trainee Marketing</span><span class="lang-en inline">Management Trainee Marketing Application</span></span></div>
+    </div>
+    <ul>
+      <li><a href="#intro"><span class="lang-de inline">Über mich</span><span class="lang-en inline">About Me</span></a></li>
+      <li><a href="#profile"><span class="lang-de inline">Profil</span><span class="lang-en inline">Profile</span></a></li>
+      <li><a href="#journey"><span class="lang-de inline">Werdegang</span><span class="lang-en inline">Journey</span></a></li>
+      <li><a href="#storck"><span class="lang-de inline">Warum Storck</span><span class="lang-en inline">Why Storck</span></a></li>
+      <li><a href="#program"><span class="lang-de inline">Programm-Fit</span><span class="lang-en inline">Program Fit</span></a></li>
+      <li><a href="#requirements"><span class="lang-de inline">Direkter Fit</span><span class="lang-en inline">Direct Match</span></a></li>
+      <li><a href="#ideas"><span class="lang-de inline">Markenfokus</span><span class="lang-en inline">Brand Focus</span></a></li>
+      <li><button class="language-toggle" id="languageToggle" type="button">English</button></li>
+      <li><a class="nav-button" href="#contact"><span class="lang-de inline">Kontakt</span><span class="lang-en inline">Contact</span></a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="pasta-shape one"></div><div class="pasta-shape two"></div><div class="pasta-shape three"></div>
+    <div class="hero-content">
+      <p class="application-tag lang-de">Storck Bewerbung</p><p class="application-tag lang-en">Storck Application</p>
+      <h1 class="lang-de">Management Trainee<br>Marketing</h1><h1 class="lang-en">Management Trainee<br>Marketing</h1>
+      <h2 class="lang-de">Consumer Insights, FMCG-Erfahrung und internationale Perspektive – für starke Marken, erfolgreiches Produktmanagement und nachhaltiges Wachstum.</h2>
+      <h2 class="lang-en">Combining consumer insights, FMCG experience and an international perspective to strengthen brands, product management and sustainable growth.</h2>
+      <p class="tagline lang-de">Business Management Graduate • FMCG • Brand & Product Management • Market Analysis • International Marketing</p>
+      <p class="tagline lang-en">Business Management Graduate • FMCG • Brand & Product Management • Market Analysis • International Marketing</p>
+      <div class="hero-pill lang-de">Produktmanagement • Marketing-Projekte • Key Account Management • Internationale Rotation</div>
+      <div class="hero-pill lang-en">Product Management • Marketing Projects • Key Account Management • International Rotation</div>
+    </div>
+  </header>
+
+  <section id="intro"><div class="intro-box">
+    <h3 class="lang-de">Liebes Storck Team,</h3><h3 class="lang-en">Dear Storck Team,</h3><div class="accent-line"></div>
+    <p class="lang-de">Mein Name ist Jan Kraege. Ich habe meinen Master of Management an der University of Technology Sydney mit einem WAM von 81,42 und einem GPA von 6,08 abgeschlossen.</p>
+    <p class="lang-en">My name is Jan Kraege. I completed my Master of Management at the University of Technology Sydney with a WAM of 81.42 and a GPA of 6.08.</p>
+    <p class="lang-de">Mein erster persönlicher Kontakt mit Storck entstand bereits 2024 beim Karrieretag Familienunternehmen in Mönchengladbach. Der direkte Austausch und der Einblick in das Unternehmen haben mein Interesse an Storck nachhaltig geprägt – insbesondere die Verbindung aus starken Marken, internationaler Ausrichtung, langfristigem Denken und einer Kultur, in der der Mensch im Mittelpunkt steht.</p>
+    <p class="lang-en">My first personal contact with Storck took place in 2024 at the Career Day for Family Businesses in Mönchengladbach. The direct exchange and insight into the company left a lasting impression on me, especially the combination of strong brands, international orientation, long-term thinking and a culture that places people at the centre.</p>
+    <p class="lang-de">Das 24-monatige Traineeprogramm spricht mich besonders an, weil es genau die Bereiche verbindet, in denen ich mich langfristig entwickeln möchte: <strong>Produktmanagement, Marketing Project Management, Vertrieb und Key Account Management, internationales strategisches Marketing sowie ein Einsatz in einer Auslandsgesellschaft</strong>.</p>
+    <p class="lang-en">The 24-month trainee programme strongly appeals to me because it combines exactly the areas in which I want to grow: <strong>product management, marketing project management, sales and key account management, international strategic marketing and an assignment in a foreign subsidiary</strong>.</p>
+  </div></section>
+
+  <section id="profile"><h3>My Profile in 60 Seconds</h3><div class="accent-line"></div>
+    <p class="section-subtitle lang-de">Ein marketingorientierter Business Graduate mit internationaler Erfahrung, analytischer Stärke, FMCG-naher Praxiserfahrung und besonderem Interesse an emotionalen Marken, Produktmanagement und internationalem Wachstum.</p>
+    <p class="section-subtitle lang-en">A marketing-oriented business graduate with international experience, strong analytical skills, FMCG-relevant practical experience and a particular interest in emotional brands, product management and international growth.</p>
+    <div class="profile-grid">
+      <div class="profile-box"><div class="emoji">🍬</div><h4 class="lang-de">Consumer & Brand Mindset</h4><h4 class="lang-en">Consumer & Brand Mindset</h4><p class="lang-de">Mich begeistert, wie Marken über Qualität, Verlässlichkeit und emotionale Relevanz langfristige Beziehungen zu Konsumenten aufbauen.</p><p class="lang-en">I am fascinated by how brands build long-term consumer relationships through quality, reliability and emotional relevance.</p><p class="lang-de">Storck zeigt mit Marken wie merci, Toffifee, Knoppers und Werther’s Original, wie starke Marken kleine Momente des Glücks schaffen können.</p><p class="lang-en">With brands such as merci, Toffifee, Knoppers and Werther’s Original, Storck demonstrates how strong brands can create small moments of happiness.</p></div>
+      <div class="profile-box"><div class="emoji">📊</div><h4 class="lang-de">Market & Consumer Insights</h4><h4 class="lang-en">Market & Consumer Insights</h4><p class="lang-de">Ich arbeite gerne mit Markt-, Kunden- und Wettbewerbsdaten, um Chancen zu erkennen und klare Handlungsempfehlungen abzuleiten.</p><p class="lang-en">I enjoy working with market, customer and competitor data to identify opportunities and derive clear recommendations.</p><p class="lang-de">Bei BRITA Australia analysierte ich Kundensegmente, Customer Behaviour, Marktpotenzial und kommerzielle Machbarkeit.</p><p class="lang-en">At BRITA Australia, I analysed customer segments, customer behaviour, market potential and commercial viability.</p></div>
+      <div class="profile-box"><div class="emoji">🛒</div><h4 class="lang-de">Sales & Marketing Schnittstelle</h4><h4 class="lang-en">Sales & Marketing Interface</h4><p class="lang-de">Besonders spannend finde ich die Schnittstelle zwischen Marke, Produkt, Handel, Kunde und kommerzieller Umsetzung.</p><p class="lang-en">I am especially interested in the interface between brand, product, retail, customer and commercial execution.</p><p class="lang-de">Bei BRITA arbeitete ich cross-funktional mit Marketing, Sales und E-Commerce zusammen.</p><p class="lang-en">At BRITA, I worked cross-functionally with Marketing, Sales and E-commerce.</p></div>
+      <div class="profile-box"><div class="emoji">🌍</div><h4 class="lang-de">Internationale Zusammenarbeit</h4><h4 class="lang-en">International Collaboration</h4><p class="lang-de">Studium und Arbeit in Australien haben meine Anpassungsfähigkeit, Selbstständigkeit und interkulturelle Kommunikation nachhaltig gestärkt.</p><p class="lang-en">Studying and working in Australia significantly strengthened my adaptability, independence and intercultural communication.</p><p class="lang-de">Diese Erfahrung passt sehr gut zu den internationalen Stationen des Storck-Traineeprogramms.</p><p class="lang-en">This experience aligns very well with the international elements of Storck’s trainee programme.</p></div>
+    </div>
+  </section>
+
+  <section id="journey"><h3 class="lang-de">Meine internationale Reise</h3><h3 class="lang-en">My International Journey</h3><div class="accent-line"></div><div class="timeline">
+    <div><strong class="lang-de">🇩🇪 Deutschland — Bachelor in Business Administration (2020–2024)</strong><strong class="lang-en">🇩🇪 Germany — Bachelor in Business Administration (2020–2024)</strong><br><span class="lang-de inline">An der Hochschule Fresenius in Wiesbaden legte ich mit Schwerpunkten in Marketing, International Management und Organisationspsychologie die Grundlage für mein Interesse an Konsumentenverhalten, Marken und internationalem Business.</span><span class="lang-en inline">At Hochschule Fresenius in Wiesbaden, I built the foundation for my interest in consumer behaviour, brands and international business through a focus on Marketing, International Management and Organisational Psychology.</span></div>
+    <div><strong class="lang-de">🇦🇺 Australien — Marketingfokussiertes Auslandssemester an der UTS (2022)</strong><strong class="lang-en">🇦🇺 Australia — Marketing-Focused Exchange Semester at UTS (2022)</strong><br><span class="lang-de inline">Während meines Auslandssemesters belegte ich ausschließlich Marketingkurse und entwickelte ein stärkeres Verständnis für internationale Konsumenten, Markenführung und unterschiedliche Marktumfelder.</span><span class="lang-en inline">During my exchange semester, I completed exclusively marketing-related courses and developed a stronger understanding of international consumers, brand management and different market environments.</span></div>
+    <div><strong class="lang-de">🇦🇺 BRITA Australia — Sales & Marketing Assistant (Nov 2022 – Apr 2023)</strong><strong class="lang-en">🇦🇺 BRITA Australia — Sales & Marketing Assistant (Nov 2022 – Apr 2023)</strong><br><span class="lang-de inline">Ich analysierte die wirtschaftliche Machbarkeit eines potenziellen Subscription Models, einschließlich Kundensegmentierung, Customer Behaviour, Marktpotenzial und Wettbewerbsumfeld. Daraus entwickelte ich eine strategische Empfehlung gegen die Umsetzung unter den bewerteten Bedingungen und präsentierte die Ergebnisse dem Management. Zusätzlich unterstützte ich Brand Tracking und arbeitete an der Schnittstelle von Marketing, Sales und E-Commerce.</span><span class="lang-en inline">I analysed the commercial viability of a potential subscription model, including customer segmentation, customer behaviour, market potential and the competitive environment. Based on the findings, I developed a strategic recommendation not to proceed under the assessed conditions and presented the results to management. I also supported brand tracking and worked at the interface of Marketing, Sales and E-commerce.</span></div>
+    <div><strong class="lang-de">🇩🇪 Karrieretag Familienunternehmen — Erster Kontakt mit Storck (2024)</strong><strong class="lang-en">🇩🇪 Career Day for Family Businesses — First Contact With Storck (2024)</strong><br><span class="lang-de inline">Beim Karrieretag Familienunternehmen in Mönchengladbach erhielt ich erstmals einen persönlichen Einblick in Storck. Besonders angesprochen haben mich die langfristige Perspektive eines Familienunternehmens, die starken Marken und die Verbindung aus Bodenständigkeit, Qualitätsanspruch und internationalem Wachstum.</span><span class="lang-en inline">At the Career Day for Family Businesses in Mönchengladbach, I gained my first personal insight into Storck. I was particularly drawn to the long-term perspective of a family-owned company, its strong brands and the combination of grounded values, high quality standards and international growth.</span></div>
+    <div><strong class="lang-de">🇩🇪 Bachelorarbeit — Supply Chains im australischen Markt (2024)</strong><strong class="lang-en">🇩🇪 Bachelor Thesis — Supply Chains in the Australian Market (2024)</strong><br><span class="lang-de inline">In einer Case Study zu BRITA untersuchte ich Herausforderungen von Supply Chains im australischen Markt und verband Marktbedingungen, operative Prozesse und strategische Unternehmensentscheidungen.</span><span class="lang-en inline">In a BRITA case study, I examined supply-chain challenges in the Australian market and connected market conditions, operational processes and strategic business decisions.</span></div>
+    <div><strong class="lang-de">🇦🇺 Master of Management an der UTS Sydney (Feb 2025 – Jun 2026)</strong><strong class="lang-en">🇦🇺 Master of Management at UTS Sydney (Feb 2025 – Jun 2026)</strong><br><span class="lang-de inline">Mit Schwerpunkten in Global Strategic Management und Strategic Supply Chain Management vertiefte ich mein strategisches Denken, meine analytische Arbeitsweise und mein Verständnis für internationale Geschäftsmodelle. Abschluss: WAM 81,42, GPA 6,08.</span><span class="lang-en inline">With a focus on Global Strategic Management and Strategic Supply Chain Management, I deepened my strategic thinking, analytical approach and understanding of international business models. Final results: WAM 81.42, GPA 6.08.</span></div>
+    <div><strong class="lang-de">🇦🇺 Tokyo Headspa Sydney — Marketing Intern (Jan 2026 – May 2026)</strong><strong class="lang-en">🇦🇺 Tokyo Headspa Sydney — Marketing Intern (Jan 2026 – May 2026)</strong><br><span class="lang-de inline">Ich unterstützte Markt- und Wettbewerbsanalysen, Kampagnenoptimierung, Performance Analysis, Influencer Research, Social Media, E-Mail-Marketing und Empfehlungen zur Weiterentwicklung des Serviceportfolios. Dabei arbeitete ich mit Mailchimp und Salesforce Marketing Cloud.</span><span class="lang-en inline">I supported market and competitor analysis, campaign optimisation, performance analysis, influencer research, social media, email marketing and recommendations for service portfolio development. I worked with Mailchimp and Salesforce Marketing Cloud.</span></div>
+    <div><strong class="lang-de">🍬 Nächster Schritt: Storck?</strong><strong class="lang-en">🍬 Next Step: Storck?</strong><br><span class="lang-de inline">Das Management-Traineeprogramm verbindet meine FMCG-nahe Erfahrung, mein Interesse an emotionalen Marken und meine internationale Perspektive mit einem strukturierten Entwicklungsweg in Produktmanagement, Marketing, Vertrieb und internationaler Strategie.</span><span class="lang-en inline">The Management Trainee Programme connects my FMCG-relevant experience, my interest in emotional brands and my international perspective with a structured development path across product management, marketing, sales and international strategy.</span></div>
+  </div></section>
+
+  <section class="brand-band"><h3 class="lang-de">Kleine Momente des Glücks – starke Marken mit langfristiger Wirkung</h3><h3 class="lang-en">Small Moments of Happiness – Strong Brands With Long-Term Impact</h3><p class="lang-de">Storck verbindet traditionsreiche Marken, hohe Qualität und konsequente Konsumentenorientierung mit internationalem Wachstum. Besonders überzeugend finde ich, dass das Unternehmen als Familienunternehmen langfristig denkt und gleichzeitig Marken kreativ und marktnah weiterentwickelt.</p><p class="lang-en">Storck combines established brands, high quality and consistent consumer orientation with international growth. I am particularly impressed by the way the family-owned company takes a long-term perspective while continuously developing its brands in a creative and market-oriented way.</p><p class="lang-de">Für mich bedeutet modernes FMCG-Marketing, emotionale Markenführung, datenbasierte Entscheidungen, Handelsverständnis und exzellente Umsetzung miteinander zu verbinden.</p><p class="lang-en">To me, modern FMCG marketing means combining emotional brand management, data-driven decisions, retail understanding and excellent execution.</p></section>
+
+  <section id="storck"><h3>Why Storck?</h3><div class="accent-line"></div><div class="intro">
+    <p class="lang-de">Storck gehört zu den bedeutenden Süßwarenunternehmen und steht für Marken, die Konsumenten über Generationen hinweg begleiten. Die Verbindung aus Qualität, Einzigartigkeit, Vertrauen und emotionaler Markenwirkung spricht mich besonders an.</p><p class="lang-en">Storck is one of the leading confectionery companies and represents brands that accompany consumers across generations. The combination of quality, uniqueness, trust and emotional brand impact strongly appeals to me.</p>
+    <p class="lang-de">Ein Familienunternehmen passt sehr gut zu mir, weil ich langfristige Beziehungen, Verlässlichkeit und persönliche Verantwortung besonders schätze. Ich möchte nicht nur einzelne Aufgaben erledigen, sondern verstehen, wie mein Beitrag in ein größeres gemeinsames Ziel einzahlt. Die bei Storck gelebte familiäre Atmosphäre, die Förderung individueller Entwicklung und die Möglichkeit, Verantwortung zu übernehmen, entsprechen genau dem Umfeld, in dem ich mich fachlich und persönlich entwickeln möchte.</p><p class="lang-en">A family-owned company is a strong fit for me because I highly value long-term relationships, reliability and personal responsibility. I do not want to simply complete individual tasks; I want to understand how my contribution supports a larger shared objective. Storck’s family-oriented atmosphere, focus on individual development and opportunity to take responsibility reflect exactly the environment in which I want to grow professionally and personally.</p>
+    <p class="lang-de">Besonders spannend finde ich außerdem Storcks internationale Ausrichtung. Die Kombination aus nationalem Produktmanagement, internationalem strategischem Marketing und einem Einsatz in einer Auslandsgesellschaft bietet die Möglichkeit, Marken sowohl lokal als auch global zu verstehen und weiterzuentwickeln.</p><p class="lang-en">I am also particularly interested in Storck’s international orientation. The combination of national product management, international strategic marketing and an assignment in a foreign subsidiary provides the opportunity to understand and develop brands from both local and global perspectives.</p>
+  </div></section>
+
+  <section id="program"><h3 class="lang-de">Warum dieses Programm zu mir passt</h3><h3 class="lang-en">Why This Programme Fits Me</h3><div class="accent-line"></div><div class="program-grid">
+    <div class="program-box"><div class="emoji">🍬</div><h4 class="lang-de">Produktmanagement</h4><h4 class="lang-en">Product Management</h4><p class="lang-de">Durch meine Erfahrung mit Customer Behaviour, Brand Tracking, Marktanalysen und Portfolioempfehlungen bringe ich eine gute Grundlage mit, um zu lernen, wie starke Marken national geführt und weiterentwickelt werden.</p><p class="lang-en">My experience with customer behaviour, brand tracking, market analysis and portfolio recommendations provides a strong foundation for learning how successful brands are managed and developed nationally.</p></div>
+    <div class="program-box"><div class="emoji">📋</div><h4 class="lang-de">Marketing Project Management</h4><h4 class="lang-en">Marketing Project Management</h4><p class="lang-de">Ich arbeite strukturiert, koordiniere gerne verschiedene Stakeholder und kann komplexe Informationen in klare Aufgaben, Präsentationen und Handlungsempfehlungen übersetzen.</p><p class="lang-en">I work in a structured manner, enjoy coordinating different stakeholders and can translate complex information into clear tasks, presentations and recommendations.</p></div>
+    <div class="program-box"><div class="emoji">🤝</div><h4 class="lang-de">Vertrieb & Key Account Management</h4><h4 class="lang-en">Sales & Key Account Management</h4><p class="lang-de">Die Kombination aus Kundenbeziehungen, kommerziellem Denken, Handelsverständnis und Umsetzung passt sehr gut zu meiner Erfahrung an der Schnittstelle von Marketing, Sales und E-Commerce.</p><p class="lang-en">The combination of customer relationships, commercial thinking, retail understanding and execution strongly aligns with my experience at the interface of Marketing, Sales and E-commerce.</p></div>
+    <div class="program-box"><div class="emoji">🌍</div><h4 class="lang-de">Internationales Marketing & Auslandseinsatz</h4><h4 class="lang-en">International Marketing & Foreign Assignment</h4><p class="lang-de">Meine Zeit in Australien hat mir gezeigt, wie wertvoll unterschiedliche Perspektiven für Marken- und Marktentscheidungen sind. Ein Einsatz in der Schweiz, den Niederlanden oder Österreich wäre für mich eine besonders attraktive Weiterentwicklung.</p><p class="lang-en">My time in Australia showed me how valuable different perspectives are for brand and market decisions. An assignment in Switzerland, the Netherlands or Austria would be a particularly attractive development opportunity.</p></div>
+  </div></section>
+
+  <section id="requirements"><h3 class="lang-de">Direkter Fit zu Storcks Anforderungen</h3><h3 class="lang-en">Direct Match With Storck’s Requirements</h3><div class="accent-line"></div><p class="section-subtitle lang-de">Storck sucht einen marketingorientierten Hochschulabsolventen mit FMCG-Erfahrung, Eigeninitiative, Leistungsbereitschaft, Zuverlässigkeit, strukturierter Arbeitsweise, Kommunikationsstärke, Teamgeist und sehr guten Deutsch- und Englischkenntnissen. Diese Kombination bringe ich durch mein Studium, meine internationalen Erfahrungen und meine bisherigen Marketing- und Sales-Projekte mit.</p><p class="section-subtitle lang-en">Storck is looking for a marketing-oriented graduate with FMCG experience, initiative, commitment, reliability, a structured working style, communication skills, team spirit and very good German and English. This combination reflects my academic background, international experience and previous Marketing and Sales projects.</p><div class="cards">
+    <div class="card accent"><div class="emoji">🎓</div><h4 class="lang-de">Marketingorientierte Ausbildung</h4><h4 class="lang-en">Marketing-Oriented Education</h4><p class="lang-de">Master of Management an der UTS mit Schwerpunkten in Global Strategic Management und Strategic Supply Chain Management sowie Bachelor in Business Administration mit Fokus auf Marketing und International Management.</p><p class="lang-en">Master of Management at UTS with a focus on Global Strategic Management and Strategic Supply Chain Management, plus a Bachelor in Business Administration focused on Marketing and International Management.</p></div>
+    <div class="card accent"><div class="emoji">🛒</div><h4 class="lang-de">FMCG-nahe Praxiserfahrung</h4><h4 class="lang-en">FMCG-Relevant Experience</h4><p class="lang-de">Bei BRITA Australia sammelte ich relevante Consumer-Goods-Erfahrung an der Schnittstelle von Marketing, Sales und E-Commerce und arbeitete mit Markt-, Kunden- und Brand-Tracking-Daten.</p><p class="lang-en">At BRITA Australia, I gained relevant consumer goods experience at the interface of Marketing, Sales and E-commerce and worked with market, customer and brand tracking data.</p></div>
+    <div class="card accent"><div class="emoji">📊</div><h4 class="lang-de">Subscription Model & Management-Empfehlung</h4><h4 class="lang-en">Subscription Model & Management Recommendation</h4><p class="lang-de">Ich analysierte ein potenzielles Subscription Model, bewertete Kundensegmente, Customer Behaviour und Marktpotenzial, entwickelte eine strategische Empfehlung und präsentierte die Ergebnisse dem Management.</p><p class="lang-en">I analysed a potential subscription model, evaluated customer segments, customer behaviour and market potential, developed a strategic recommendation and presented the results to management.</p></div>
+    <div class="card accent"><div class="emoji">📣</div><h4 class="lang-de">Kampagnen & digitale Marketingpraxis</h4><h4 class="lang-en">Campaigns & Digital Marketing Practice</h4><p class="lang-de">Bei Tokyo Headspa unterstützte ich Kampagnenoptimierung, Performance Analysis, Social Media, Influencer Research und E-Mail-Marketing mit Mailchimp und Salesforce Marketing Cloud.</p><p class="lang-en">At Tokyo Headspa, I supported campaign optimisation, performance analysis, social media, influencer research and email marketing using Mailchimp and Salesforce Marketing Cloud.</p></div>
+    <div class="card accent"><div class="emoji">🤝</div><h4 class="lang-de">Kommunikation, Teamgeist & Zuverlässigkeit</h4><h4 class="lang-en">Communication, Team Spirit & Reliability</h4><p class="lang-de">Ich arbeite gerne mit unterschiedlichen Stakeholdern, kommuniziere klar und verlässlich und übernehme Verantwortung für eine strukturierte und hochwertige Umsetzung.</p><p class="lang-en">I enjoy working with different stakeholders, communicate clearly and reliably and take ownership of structured, high-quality execution.</p></div>
+    <div class="card accent"><div class="emoji">🌍</div><h4 class="lang-de">Deutsch, Englisch & internationale Erfahrung</h4><h4 class="lang-en">German, English & International Experience</h4><p class="lang-de">Deutsch ist meine Muttersprache; Englisch beherrsche ich auf C1-Niveau. Mehrere Jahre Studium und Arbeit in Australien haben meine interkulturelle Kompetenz und Flexibilität gestärkt.</p><p class="lang-en">German is my native language and I speak English at C1 level. Several years of studying and working in Australia strengthened my intercultural competence and flexibility.</p></div>
+  </div></section>
+
+  <section id="ideas"><h3 class="lang-de">Drei Themen, die ich bei Storck besonders spannend finde</h3><h3 class="lang-en">Three Topics I Find Especially Exciting at Storck</h3><div class="accent-line"></div><div class="cards">
+    <div class="card accent"><div class="emoji">❤️</div><h4 class="lang-de">Emotionale Marken weiterentwickeln</h4><h4 class="lang-en">Developing Emotional Brands</h4><p class="lang-de">Mich interessiert, wie etablierte Marken emotional relevant bleiben, neue Zielgruppen erreichen und ihre Identität konsistent über Produkte, Kampagnen und Märkte hinweg vermitteln.</p><p class="lang-en">I am interested in how established brands remain emotionally relevant, reach new target groups and communicate a consistent identity across products, campaigns and markets.</p></div>
+    <div class="card accent"><div class="emoji">🛒</div><h4 class="lang-de">Vom Consumer Insight zur Marktwirkung</h4><h4 class="lang-en">From Consumer Insight to Market Impact</h4><p class="lang-de">Konsumenten- und Marktdaten werden besonders wertvoll, wenn sie in konkrete Produkt-, Kommunikations- und Vertriebsentscheidungen übersetzt werden.</p><p class="lang-en">Consumer and market data become particularly valuable when translated into concrete product, communication and sales decisions.</p></div>
+    <div class="card accent"><div class="emoji">🌍</div><h4 class="lang-de">Globale Marken, lokale Relevanz</h4><h4 class="lang-en">Global Brands, Local Relevance</h4><p class="lang-de">Internationale Märkte erfordern ein gutes Verständnis für lokale Konsumentenbedürfnisse, Handelsstrukturen und die gezielte Anpassung globaler Markenstrategien.</p><p class="lang-en">International markets require a strong understanding of local consumer needs, retail structures and the targeted adaptation of global brand strategies.</p></div>
+  </div></section>
+
+  <section class="highlight"><h3 class="lang-de">Meine Motivation</h3><h3 class="lang-en">My Motivation</h3><div class="accent-line"></div><p class="lang-de">Ich habe in Deutschland und Australien studiert und gearbeitet und dabei eine starke Leidenschaft für Marketing, Consumer Insights, Markenführung und datenbasierte Entscheidungen entwickelt.</p><p class="lang-en">I studied and worked in Germany and Australia and developed a strong passion for marketing, consumer insights, brand management and data-driven decisions.</p><p class="lang-de">Jetzt suche ich ein Umfeld, in dem ich strukturiert lernen, Verantwortung übernehmen und gleichzeitig langfristig an starken Marken mitarbeiten kann. Die Verbindung aus Familienunternehmen, internationaler Ausrichtung, bekannten Marken und einem vielseitigen Entwicklungsprogramm macht Storck für mich besonders attraktiv.</p><p class="lang-en">I am now looking for an environment where I can learn in a structured way, take responsibility and contribute to strong brands over the long term. The combination of a family-owned company, international orientation, well-known brands and a diverse development programme makes Storck particularly attractive to me.</p><p class="lang-de">Für mich ist das Management-Traineeprogramm im Marketing genau die Möglichkeit, meine bisherigen Erfahrungen einzubringen und mich in Richtung Produktmanagement, internationales Marketing und langfristige Markenverantwortung weiterzuentwickeln.</p><p class="lang-en">For me, the Management Trainee Programme in Marketing is exactly the opportunity to contribute my previous experience and develop toward product management, international marketing and long-term brand responsibility.</p></section>
+
+  <footer id="contact"><p><strong>Jan Kraege</strong></p><p>Email: <a href="mailto:jan.kraege@icloud.com">jan.kraege@icloud.com</a></p><p>LinkedIn: <a href="https://www.linkedin.com/in/jan-kraege" target="_blank" rel="noopener">linkedin.com/in/jan-kraege</a></p></footer>
+
+  <script>
+    const toggleButton = document.getElementById("languageToggle");
+    function setLanguage(language) {
+      if (language === "en") { document.body.classList.remove("show-de"); document.body.classList.add("show-en"); document.documentElement.lang = "en"; toggleButton.textContent = "Deutsch"; }
+      else { document.body.classList.remove("show-en"); document.body.classList.add("show-de"); document.documentElement.lang = "de"; toggleButton.textContent = "English"; }
+    }
+    toggleButton.addEventListener("click", function () { const currentlyGerman = document.body.classList.contains("show-de"); setLanguage(currentlyGerman ? "en" : "de"); });
+    setLanguage("de");
+  </script>
+</body>
+</html>
